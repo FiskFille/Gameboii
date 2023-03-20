@@ -1,6 +1,7 @@
 package com.fiskmods.gameboii.level;
 
 import java.awt.Graphics2D;
+import java.util.List;
 
 import com.fiskmods.gameboii.engine.BoundingBox;
 import com.fiskmods.gameboii.graphics.Screen;
@@ -13,14 +14,14 @@ public abstract class LevelObject
     public int width;
     public int height;
 
-    public double posX;
-    public double posY;
-    public double prevPosX;
-    public double prevPosY;
+    public float posX;
+    public float posY;
+    public float prevPosX;
+    public float prevPosY;
 
     public boolean isDead;
 
-    public LevelObject(double x, double y, int width, int height)
+    public LevelObject(float x, float y, int width, int height)
     {
         posX = prevPosX = x;
         posY = prevPosY = y;
@@ -31,8 +32,13 @@ public abstract class LevelObject
 
     public final boolean tick()
     {
+        if (isDead)
+        {
+            return true;
+        }
+
         onUpdate();
-        return isDead;
+        return false;
     }
 
     public void onUpdate()
@@ -48,6 +54,24 @@ public abstract class LevelObject
     public boolean canCollideWith(LevelObject obj)
     {
         return true;
+    }
+
+    public void addCollisionBoxes(List<BoundingBox> list, BoundingBox colliding)
+    {
+        addCollisionBox(boundingBox, list, colliding);
+    }
+
+    protected void addCollisionBox(BoundingBox box, List<BoundingBox> list, BoundingBox colliding)
+    {
+        if (colliding == null || box.intersectsWith(colliding))
+        {
+            list.add(box);
+        }
+    }
+
+    public static boolean canObjectsCollide(LevelObject o1, LevelObject o2)
+    {
+        return o1 != o2 && o1.canCollideWith(o2) && o2.canCollideWith(o1);
     }
 
     public int depthPlane()
@@ -66,5 +90,21 @@ public abstract class LevelObject
         boundingBox.offset(posX, posY);
         width = w;
         height = h;
+    }
+
+    public void onAttacked(LevelObject source)
+    {
+    }
+
+    public float distanceToSq(float x, float y)
+    {
+        x -= posX;
+        y -= posY;
+        return x * x + y * y;
+    }
+
+    public float distanceTo(float x, float y)
+    {
+        return (float) Math.sqrt(distanceToSq(x, y));
     }
 }

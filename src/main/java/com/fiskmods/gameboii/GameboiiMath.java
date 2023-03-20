@@ -36,6 +36,18 @@ public class GameboiiMath
         return d < i ? i - 1 : i;
     }
 
+    public static int ceil(float f)
+    {
+        int i = (int) f;
+        return f > i ? i + 1 : i;
+    }
+
+    public static int ceil(double d)
+    {
+        int i = (int) d;
+        return d > i ? i + 1 : i;
+    }
+
     public static int clamp(int value, int min, int max)
     {
         return value < min ? min : (value > max ? max : value);

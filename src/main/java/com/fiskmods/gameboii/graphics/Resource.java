@@ -24,6 +24,11 @@ public class Resource
         this(width, height, () -> data[(int) (Engine.getSystemTime() / 50 / delay % frames)]);
     }
 
+    public Resource(BufferedImage image)
+    {
+        this(image.getWidth(), image.getHeight(), () -> image);
+    }
+
     public BufferedImage get()
     {
         return supplier.get();

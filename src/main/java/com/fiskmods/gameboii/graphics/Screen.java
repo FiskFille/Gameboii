@@ -13,9 +13,9 @@ import java.util.function.Supplier;
 
 import com.fiskmods.gameboii.Abstract2DGame;
 import com.fiskmods.gameboii.Engine;
-import com.fiskmods.gameboii.batfish.BatfishGraphics;
-import com.fiskmods.gameboii.batfish.BatfishSounds;
 import com.fiskmods.gameboii.engine.InputKey;
+import com.fiskmods.gameboii.games.batfish.BatfishGraphics;
+import com.fiskmods.gameboii.games.batfish.BatfishSounds;
 
 public abstract class Screen
 {
@@ -24,7 +24,7 @@ public abstract class Screen
 
     private int selectedId;
 
-    protected GameboiiFont fontRenderer;
+    public GameboiiFont fontRenderer;
     protected int width;
     protected int height;
 
@@ -189,42 +189,47 @@ public abstract class Screen
         drawCenteredImage(g2d, BatfishGraphics.coin, x, y, 32, 32);
     }
 
-    public void drawImage(Graphics2D g2d, Resource resource, int x, int y)
+    public static void drawImage(Graphics2D g2d, Resource resource, int x, int y)
     {
         drawImage(g2d, resource, x, y, resource.getWidth(), resource.getHeight());
     }
 
-    public void drawCenteredImage(Graphics2D g2d, Resource resource, int x, int y)
+    public static void drawImage(Graphics2D g2d, Resource resource, int x, int y, int scale)
+    {
+        drawImage(g2d, resource, x, y, resource.getWidth() * scale, resource.getHeight() * scale);
+    }
+
+    public static void drawCenteredImage(Graphics2D g2d, Resource resource, int x, int y)
     {
         drawImage(g2d, resource, x - resource.getWidth() / 2, y - resource.getHeight() / 2);
     }
 
-    public void drawImage(Graphics2D g2d, Resource resource, int x, int y, int width, int height)
+    public static void drawImage(Graphics2D g2d, Resource resource, int x, int y, int width, int height)
     {
         g2d.drawImage(resource.get(), x, y, width, height, null);
     }
 
-    public void drawCenteredImage(Graphics2D g2d, Resource resource, int x, int y, int width, int height)
+    public static void drawCenteredImage(Graphics2D g2d, Resource resource, int x, int y, int width, int height)
     {
         drawImage(g2d, resource, x - width / 2, y - height / 2, width, height);
     }
 
-    public void drawImage(Graphics2D g2d, Resource resource, int x, int y, int width, int height, int srcX1, int srcY1, int srcX2, int srcY2)
+    public static void drawImage(Graphics2D g2d, Resource resource, int x, int y, int width, int height, int srcX1, int srcY1, int srcX2, int srcY2)
     {
         g2d.drawImage(resource.get(), x, y, width + x, height + y, srcX1, srcY1, srcX2, srcY2, null);
     }
 
-    public void drawImage(Graphics2D g2d, Resource resource, int x, int y, int width, int height, Rectangle src)
+    public static void drawImage(Graphics2D g2d, Resource resource, int x, int y, int width, int height, Rectangle src)
     {
         drawImage(g2d, resource, x, y, width, height, (int) src.getMinX(), (int) src.getMinY(), (int) src.getMaxX(), (int) src.getMaxY());
     }
 
-    public void drawCenteredImage(Graphics2D g2d, Resource resource, int x, int y, int width, int height, int srcX1, int srcY1, int srcX2, int srcY2)
+    public static void drawCenteredImage(Graphics2D g2d, Resource resource, int x, int y, int width, int height, int srcX1, int srcY1, int srcX2, int srcY2)
     {
         drawImage(g2d, resource, x - width / 2, y - height / 2, width, height, srcX1, srcY1, srcX2, srcY2);
     }
 
-    public void drawCenteredImage(Graphics2D g2d, Resource resource, int x, int y, int width, int height, Rectangle src)
+    public static void drawCenteredImage(Graphics2D g2d, Resource resource, int x, int y, int width, int height, Rectangle src)
     {
         drawCenteredImage(g2d, resource, x, y, width, height, (int) src.getMinX(), (int) src.getMinY(), (int) src.getMaxX(), (int) src.getMaxY());
     }

@@ -1,20 +1,18 @@
 package com.fiskmods.gameboii.engine;
 
-import java.awt.Point;
-
 public class BoundingBox
 {
-    public double minX;
-    public double minY;
-    public double maxX;
-    public double maxY;
+    public float minX;
+    public float minY;
+    public float maxX;
+    public float maxY;
 
-    public static BoundingBox getBoundingBox(double minX, double minY, double maxX, double maxY)
+    public static BoundingBox getBoundingBox(float minX, float minY, float maxX, float maxY)
     {
         return new BoundingBox(minX, minY, maxX, maxY);
     }
 
-    protected BoundingBox(double minX, double minY, double maxX, double maxY)
+    protected BoundingBox(float minX, float minY, float maxX, float maxY)
     {
         this.minX = minX;
         this.minY = minY;
@@ -22,7 +20,7 @@ public class BoundingBox
         this.maxY = maxY;
     }
 
-    public BoundingBox setBounds(double minX, double minY, double maxX, double maxY)
+    public BoundingBox setBounds(float minX, float minY, float maxX, float maxY)
     {
         this.minX = minX;
         this.minY = minY;
@@ -31,52 +29,52 @@ public class BoundingBox
         return this;
     }
 
-    public BoundingBox addCoord(double x, double y)
+    public BoundingBox addCoord(float x, float y)
     {
-        double d0 = minX;
-        double d1 = minY;
-        double d2 = maxX;
-        double d3 = maxY;
+        float f0 = minX;
+        float f1 = minY;
+        float f2 = maxX;
+        float f3 = maxY;
 
         if (x < 0)
         {
-            d0 += x;
+            f0 += x;
         }
 
         if (x > 0)
         {
-            d2 += x;
+            f2 += x;
         }
 
         if (y < 0)
         {
-            d1 += y;
+            f1 += y;
         }
 
         if (y > 0)
         {
-            d3 += y;
+            f3 += y;
         }
 
-        return getBoundingBox(d0, d1, d2, d3);
+        return getBoundingBox(f0, f1, f2, f3);
     }
 
-    public BoundingBox expand(double x, double y)
+    public BoundingBox expand(float x, float y)
     {
         return getBoundingBox(minX - x, minY - y, maxX + x, maxY + y);
     }
 
     public BoundingBox merge(BoundingBox box)
     {
-        double d0 = Math.min(minX, box.minX);
-        double d1 = Math.min(minY, box.minY);
-        double d2 = Math.max(maxX, box.maxX);
-        double d3 = Math.max(maxY, box.maxY);
+        float f0 = Math.min(minX, box.minX);
+        float f1 = Math.min(minY, box.minY);
+        float f2 = Math.max(maxX, box.maxX);
+        float f3 = Math.max(maxY, box.maxY);
 
-        return getBoundingBox(d0, d1, d2, d3);
+        return getBoundingBox(f0, f1, f2, f3);
     }
 
-    public BoundingBox getOffsetBoundingBox(double x, double y)
+    public BoundingBox getOffsetBoundingBox(float x, float y)
     {
         return getBoundingBox(minX + x, minY + y, maxX + x, maxY + y);
     }
@@ -86,7 +84,7 @@ public class BoundingBox
         return box.maxX > minX && box.minX < maxX && box.maxY > minY && box.minY < maxY;
     }
 
-    public BoundingBox offset(double x, double y)
+    public BoundingBox offset(float x, float y)
     {
         minX += x;
         minY += y;
@@ -95,19 +93,19 @@ public class BoundingBox
         return this;
     }
 
-    public boolean isPointInside(Point p)
+    public boolean isPointInside(Point2f p)
     {
-        return p.x > minX && p.x < maxX && p.y > minY && p.y < maxY;
+        return p.xCoord > minX && p.xCoord < maxX && p.yCoord > minY && p.yCoord < maxY;
     }
 
-    public double getAverageEdgeLength()
+    public float getAverageEdgeLength()
     {
-        double d0 = maxX - minX;
-        double d1 = maxY - minY;
-        return (d0 + d1) / 2.0;
+        float f0 = maxX - minX;
+        float f1 = maxY - minY;
+        return (f0 + f1) / 2;
     }
 
-    public BoundingBox contract(double x, double y)
+    public BoundingBox contract(float x, float y)
     {
         return getBoundingBox(minX + x, minY + y, maxY - y, maxX - x);
     }
@@ -125,72 +123,139 @@ public class BoundingBox
         maxY = box.maxY;
     }
 
-    public double calculateXOffset(BoundingBox box, double d0)
+    public float calculateXOffset(BoundingBox box, float f0)
     {
         if (box.maxY > minY && box.minY < maxY)
         {
-            double d1;
+            float f1;
 
-            if (d0 > 0 && box.maxX <= minX)
+            if (f0 > 0 && box.maxX <= minX)
             {
-                d1 = minX - box.maxX;
+                f1 = minX - box.maxX;
 
-                if (d1 < d0)
+                if (f1 < f0)
                 {
-                    d0 = d1;
+                    f0 = f1;
                 }
             }
 
-            if (d0 < 0 && box.minX >= maxX)
+            if (f0 < 0 && box.minX >= maxX)
             {
-                d1 = maxX - box.minX;
+                f1 = maxX - box.minX;
 
-                if (d1 > d0)
+                if (f1 > f0)
                 {
-                    d0 = d1;
+                    f0 = f1;
                 }
             }
 
-            return d0;
+            return f0;
         }
         else
         {
-            return d0;
+            return f0;
         }
     }
 
-    public double calculateYOffset(BoundingBox box, double d0)
+    public float calculateYOffset(BoundingBox box, float f0)
     {
         if (box.maxX > minX && box.minX < maxX)
         {
-            double d1;
+            float f1;
 
-            if (d0 > 0 && box.maxY <= minY)
+            if (f0 > 0 && box.maxY <= minY)
             {
-                d1 = minY - box.maxY;
+                f1 = minY - box.maxY;
 
-                if (d1 < d0)
+                if (f1 < f0)
                 {
-                    d0 = d1;
+                    f0 = f1;
                 }
             }
 
-            if (d0 < 0 && box.minY >= maxY)
+            if (f0 < 0 && box.minY >= maxY)
             {
-                d1 = maxY - box.minY;
+                f1 = maxY - box.minY;
 
-                if (d1 > d0)
+                if (f1 > f0)
                 {
-                    d0 = d1;
+                    f0 = f1;
                 }
             }
 
-            return d0;
+            return f0;
         }
         else
         {
-            return d0;
+            return f0;
         }
+    }
+
+    public Point2f calculateIntercept(Point2f a, Point2f b)
+    {
+        Point2f x0 = a.getIntermediateWithXValue(b, minX);
+        Point2f x1 = a.getIntermediateWithXValue(b, maxX);
+        Point2f y0 = a.getIntermediateWithYValue(b, minY);
+        Point2f y1 = a.getIntermediateWithYValue(b, maxY);
+
+        if (!isPointInY(x0))
+        {
+            x0 = null;
+        }
+
+        if (!isPointInY(x1))
+        {
+            x1 = null;
+        }
+
+        if (!isPointInX(y0))
+        {
+            y0 = null;
+        }
+
+        if (!isPointInX(y1))
+        {
+            y1 = null;
+        }
+
+        Point2f result = null;
+
+        if (x0 != null && (result == null || a.squareDistanceTo(x0) < a.squareDistanceTo(result)))
+        {
+            result = x0;
+        }
+
+        if (x1 != null && (result == null || a.squareDistanceTo(x1) < a.squareDistanceTo(result)))
+        {
+            result = x1;
+        }
+
+        if (y0 != null && (result == null || a.squareDistanceTo(y0) < a.squareDistanceTo(result)))
+        {
+            result = y0;
+        }
+
+        if (y1 != null && (result == null || a.squareDistanceTo(y1) < a.squareDistanceTo(result)))
+        {
+            result = y1;
+        }
+
+        return result;
+    }
+
+    private boolean isPointInY(Point2f p)
+    {
+        return p != null && p.yCoord >= minY && p.yCoord <= maxY;
+    }
+
+    private boolean isPointInX(Point2f p)
+    {
+        return p != null && p.xCoord >= minX && p.xCoord <= maxX;
+    }
+
+    public Point2f center()
+    {
+        return new Point2f((minX + maxX) / 2, (minY + maxY) / 2);
     }
 
     @Override
