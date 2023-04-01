@@ -1,11 +1,11 @@
 package com.fiskmods.gameboii;
 
+import com.fiskmods.gameboii.graphics.GameboiiFont;
+import com.fiskmods.gameboii.graphics.screen.Screen;
+
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
-
-import com.fiskmods.gameboii.graphics.GameboiiFont;
-import com.fiskmods.gameboii.graphics.Screen;
 
 public abstract class Abstract2DGame implements IGame, ISaveObject
 {

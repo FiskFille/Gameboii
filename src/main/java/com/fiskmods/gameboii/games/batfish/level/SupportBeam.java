@@ -3,7 +3,7 @@ package com.fiskmods.gameboii.games.batfish.level;
 import java.awt.Graphics2D;
 
 import com.fiskmods.gameboii.games.batfish.BatfishGraphics;
-import com.fiskmods.gameboii.graphics.Screen;
+import com.fiskmods.gameboii.graphics.screen.Screen;
 import com.fiskmods.gameboii.level.LevelObject;
 
 public class SupportBeam extends LevelObject

@@ -10,7 +10,7 @@ import com.fiskmods.gameboii.engine.DialogueSpeaker;
 import com.fiskmods.gameboii.games.batfish.level.BatfishPlayer;
 import com.fiskmods.gameboii.games.batfish.level.SpodermenObject;
 import com.fiskmods.gameboii.games.batfish.screen.ScreenCredits;
-import com.fiskmods.gameboii.graphics.ScreenDialogue;
+import com.fiskmods.gameboii.graphics.screen.ScreenDialogue;
 import com.fiskmods.gameboii.level.Level;
 import com.fiskmods.gameboii.level.LevelObject;
 

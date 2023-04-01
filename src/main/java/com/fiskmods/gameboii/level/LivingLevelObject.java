@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.util.Random;
 
 import com.fiskmods.gameboii.graphics.Resource;
-import com.fiskmods.gameboii.graphics.Screen;
+import com.fiskmods.gameboii.graphics.screen.Screen;
 
 public abstract class LivingLevelObject extends MovingLevelObject
 {

@@ -1,12 +1,14 @@
 package com.fiskmods.gameboii.games.batfish.screen;
 
-import java.awt.Graphics2D;
-
 import com.fiskmods.gameboii.Engine;
 import com.fiskmods.gameboii.games.batfish.Batfish;
 import com.fiskmods.gameboii.games.batfish.BatfishGraphics;
 import com.fiskmods.gameboii.graphics.GameboiiFont;
-import com.fiskmods.gameboii.graphics.Screen;
+import com.fiskmods.gameboii.graphics.screen.ButtonLayout;
+import com.fiskmods.gameboii.graphics.screen.ConsoleButtonType;
+import com.fiskmods.gameboii.graphics.screen.Screen;
+
+import java.awt.Graphics2D;
 
 public class ScreenMainMenu extends Screen
 {
@@ -15,13 +17,15 @@ public class ScreenMainMenu extends Screen
     {
         int x = width / 2 - 200;
         int y = 184;
+        buttonList.builder()
+                .add("Start Game", () -> Engine.displayScreen(new ScreenIngame(true)))
+                .add("Shop", () -> Engine.displayScreen(new ScreenShopMain()))
+                .add("Options", () -> Engine.displayScreen(new ScreenOptions(null)))
+                .add("Quit", Engine.system()::quit)
+                .layout(ButtonLayout.spaced(0, 45))
+                .build(x, y, 400, 40);
 
-        new Button(x, y + 45 * 0, 400, 40, "Start Game", () -> Engine.displayScreen(new ScreenIngame(true)));
-        new Button(x, y + 45 * 1, 400, 40, "Shop", () -> Engine.displayScreen(new ScreenShopMain()));
-        new Button(x, y + 45 * 2, 400, 40, "Options", () -> Engine.displayScreen(new ScreenOptions(null)));
-        new Button(x, y + 45 * 3, 400, 40, "Quit", () -> Engine.system().quit());
-
-        addConsoleButton(ConsoleButtonType.X, "Select", this::pressButton);
+        addConsoleButton(ConsoleButtonType.X, "Select", buttonList::press);
     }
 
     @Override
@@ -30,20 +34,10 @@ public class ScreenMainMenu extends Screen
         drawDefaultBackground(g2d);
         drawCenteredImage(g2d, BatfishGraphics.logo, width / 2, 80, 436, 84);
 
-        g2d.setFont(GameboiiFont.BUTTON_TEXT);
         String s = "Copyright FiskFille 2014";
-        fontRenderer.drawString(s, width - fontRenderer.getStringWidth(s) - 15, height - 10, 0xffffff);
+        g2d.setFont(GameboiiFont.BUTTON_TEXT);
+        fontRenderer.drawString(s, width - fontRenderer.getStringWidth(s) - 15, height - 10, 0xFFFFFF);
 
-//        g2d.setFont(GameboiiFont.DEFAULT);
-//        s = SHFormatHelper.formatNumber(BatfishData.totalCoins);
-//
-//        int color = 0xF8AD20;
-//        int color0 = 0xFFE649;
-//        int color1 = 0x9D6100;
-//
-////        fontRenderer.drawStringWithShadow(s, width / 2 - 155 + 2, 160 + 2, color1, 0);
-//        fontRenderer.drawStringWithShadow(s, width / 2 - 155, 160, 0xFFCD21, 0x3F2700, 2);
-//        drawCenteredImage(g2d, BatfishGraphics.coin, width / 2 - 180, 151, 32, 32);
         drawCoinCount(g2d, width / 2 - 180, 151, Batfish.INSTANCE.player.totalCoins, false);
         super.draw(g2d);
     }

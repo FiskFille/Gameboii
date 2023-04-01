@@ -7,7 +7,7 @@ import com.fiskmods.gameboii.games.batfish.BatfishGraphics;
 import com.fiskmods.gameboii.games.batfish.BatfishSounds;
 import com.fiskmods.gameboii.games.batfish.level.PowerupObject.Type;
 import com.fiskmods.gameboii.games.batfish.screen.ScreenGameOver;
-import com.fiskmods.gameboii.graphics.Screen;
+import com.fiskmods.gameboii.graphics.screen.Screen;
 import com.fiskmods.gameboii.level.LevelObject;
 
 public class FloorObject extends LevelObject

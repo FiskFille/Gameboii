@@ -9,7 +9,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.BiFunction;
 
-import com.fiskmods.gameboii.Cartridge;
 import com.fiskmods.gameboii.Engine;
 import com.fiskmods.gameboii.ISaveObject;
 import com.fiskmods.gameboii.engine.Dialogue;
@@ -23,8 +22,8 @@ import com.fiskmods.gameboii.games.batfish.level.PowerupObject.Type;
 import com.fiskmods.gameboii.games.batfish.screen.ScreenIngame;
 import com.fiskmods.gameboii.graphics.IResourceLoader;
 import com.fiskmods.gameboii.graphics.Resource;
-import com.fiskmods.gameboii.graphics.Screen;
-import com.fiskmods.gameboii.graphics.ScreenDialogue;
+import com.fiskmods.gameboii.graphics.screen.Screen;
+import com.fiskmods.gameboii.graphics.screen.ScreenDialogue;
 import com.fiskmods.gameboii.level.LivingLevelObject;
 
 public class BatfishPlayer extends LivingLevelObject implements ISaveObject

@@ -1,13 +1,13 @@
 package com.fiskmods.gameboii.games.batfish.screen;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-
 import com.fiskmods.gameboii.Engine;
 import com.fiskmods.gameboii.games.batfish.Batfish;
 import com.fiskmods.gameboii.games.batfish.BatfishSounds;
 import com.fiskmods.gameboii.graphics.GameboiiFont;
-import com.fiskmods.gameboii.graphics.Screen;
+import com.fiskmods.gameboii.graphics.screen.Screen;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
 
 public class ScreenLoading extends Screen
 {

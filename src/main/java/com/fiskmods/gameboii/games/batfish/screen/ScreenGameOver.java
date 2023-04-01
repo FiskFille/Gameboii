@@ -1,6 +1,15 @@
 package com.fiskmods.gameboii.games.batfish.screen;
 
-import static java.awt.image.AffineTransformOp.*;
+import com.fiskmods.gameboii.Engine;
+import com.fiskmods.gameboii.GameboiiMath;
+import com.fiskmods.gameboii.games.batfish.Batfish;
+import com.fiskmods.gameboii.games.batfish.BatfishGraphics;
+import com.fiskmods.gameboii.games.batfish.BatfishSounds;
+import com.fiskmods.gameboii.games.batfish.level.BatfishPlayer.Skin;
+import com.fiskmods.gameboii.graphics.GameboiiFont;
+import com.fiskmods.gameboii.graphics.screen.ButtonLayout;
+import com.fiskmods.gameboii.graphics.screen.ConsoleButtonType;
+import com.fiskmods.gameboii.graphics.screen.Screen;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
@@ -9,14 +18,8 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
-import com.fiskmods.gameboii.Engine;
-import com.fiskmods.gameboii.GameboiiMath;
-import com.fiskmods.gameboii.games.batfish.Batfish;
-import com.fiskmods.gameboii.games.batfish.BatfishGraphics;
-import com.fiskmods.gameboii.games.batfish.BatfishSounds;
-import com.fiskmods.gameboii.games.batfish.level.BatfishPlayer.Skin;
-import com.fiskmods.gameboii.graphics.GameboiiFont;
-import com.fiskmods.gameboii.graphics.Screen;
+import static java.awt.image.AffineTransformOp.TYPE_BILINEAR;
+import static java.awt.image.AffineTransformOp.TYPE_NEAREST_NEIGHBOR;
 
 public class ScreenGameOver extends Screen
 {
@@ -39,20 +42,22 @@ public class ScreenGameOver extends Screen
         if (ticks >= 75)
         {
             int x = width / 2 - 200;
-            int y = 184;
+            int y = 274;
+            buttonList.builder()
+                    .add("Play Again", () ->
+                    {
+                        Engine.displayScreen(new ScreenIngame(false));
+                        Batfish.INSTANCE.titleThemeTicks = 0;
+                    })
+                    .add("Quit to Title", () ->
+                    {
+                        Engine.displayScreen(null);
+                        Batfish.INSTANCE.titleThemeTicks = 0;
+                    })
+                    .layout(ButtonLayout.spaced(0, 45))
+                    .build(x, y, 400, 40);
 
-            new Button(x, y + 45 * 2, 400, 40, "Play Again", () ->
-            {
-                Engine.displayScreen(new ScreenIngame(false));
-                Batfish.INSTANCE.titleThemeTicks = 0;
-            });
-            new Button(x, y + 45 * 3, 400, 40, "Quit to Title", () ->
-            {
-                Engine.displayScreen(null);
-                Batfish.INSTANCE.titleThemeTicks = 0;
-            });
-
-            addConsoleButton(ConsoleButtonType.X, "Select", this::pressButton);
+            addConsoleButton(ConsoleButtonType.X, "Select", buttonList::press);
         }
         else
         {

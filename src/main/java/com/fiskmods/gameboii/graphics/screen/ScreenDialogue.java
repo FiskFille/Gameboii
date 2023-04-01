@@ -1,12 +1,12 @@
-package com.fiskmods.gameboii.graphics;
+package com.fiskmods.gameboii.graphics.screen;
+
+import com.fiskmods.gameboii.Engine;
+import com.fiskmods.gameboii.engine.Dialogue;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-
-import com.fiskmods.gameboii.Engine;
-import com.fiskmods.gameboii.engine.Dialogue;
 
 public class ScreenDialogue extends Screen
 {

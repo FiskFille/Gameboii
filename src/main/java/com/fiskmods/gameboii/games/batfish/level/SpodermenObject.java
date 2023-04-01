@@ -10,7 +10,7 @@ import com.fiskmods.gameboii.games.batfish.Batfish;
 import com.fiskmods.gameboii.games.batfish.BatfishDialogue;
 import com.fiskmods.gameboii.games.batfish.BatfishGraphics;
 import com.fiskmods.gameboii.games.batfish.screen.ScreenIngame;
-import com.fiskmods.gameboii.graphics.Screen;
+import com.fiskmods.gameboii.graphics.screen.Screen;
 import com.fiskmods.gameboii.level.LevelObject;
 import com.fiskmods.gameboii.level.LivingLevelObject;
 

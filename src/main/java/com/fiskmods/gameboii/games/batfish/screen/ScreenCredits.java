@@ -1,21 +1,16 @@
 package com.fiskmods.gameboii.games.batfish.screen;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-
-import com.fiskmods.gameboii.Cartridge;
 import com.fiskmods.gameboii.Engine;
 import com.fiskmods.gameboii.engine.InputKey;
 import com.fiskmods.gameboii.games.batfish.Batfish;
 import com.fiskmods.gameboii.games.batfish.BatfishCartridge;
 import com.fiskmods.gameboii.games.batfish.BatfishSounds;
 import com.fiskmods.gameboii.graphics.GameboiiFont;
-import com.fiskmods.gameboii.graphics.Screen;
+import com.fiskmods.gameboii.graphics.screen.Screen;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.util.*;
 
 public class ScreenCredits extends Screen
 {

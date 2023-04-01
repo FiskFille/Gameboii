@@ -1,12 +1,15 @@
 package com.fiskmods.gameboii.games.batfish.screen;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-
 import com.fiskmods.gameboii.Engine;
 import com.fiskmods.gameboii.graphics.GameboiiFont;
-import com.fiskmods.gameboii.graphics.Screen;
-import com.fiskmods.gameboii.sound.Sound.Category;
+import com.fiskmods.gameboii.graphics.screen.ButtonLayout;
+import com.fiskmods.gameboii.graphics.screen.ButtonList;
+import com.fiskmods.gameboii.graphics.screen.ConsoleButtonType;
+import com.fiskmods.gameboii.graphics.screen.Screen;
+import com.fiskmods.gameboii.sound.Sound;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
 
 public class ScreenOptions extends Screen
 {
@@ -21,20 +24,22 @@ public class ScreenOptions extends Screen
     @Override
     public void initScreen()
     {
-        int x = width / 2 - 200;
-        int y = 140;
-        int i = 0;
+        ButtonList.ButtonBuilder builder = buttonList.builder();
 
-        for (Category category : Category.values())
+        for (Sound.Category category : Sound.Category.values())
         {
-            new Slider(x, y + 45 * i, 400, 40, category.name, category::getVolume, category::setVolume);
-            ++i;
+            builder.addSlider(category.name, category::getVolume, category::setVolume);
         }
 
-        new Button(x, y + 45 * i + 20, 400, 40, "Back", () -> Engine.displayScreen(returnScreen));
-        cycleButtons(-1);
+        int x = width / 2 - 200;
+        int y = 140;
+        builder.add("Back", () -> Engine.displayScreen(returnScreen))
+                .layout(ButtonLayout.spaced(0, 45)
+                        .andThen(ButtonLayout.offsetLast(0, 20)))
+                .build(x, y, 400, 40);
 
-        addConsoleButton(ConsoleButtonType.X, "Select", this::pressButton);
+        buttonList.cycle(-1);
+        addConsoleButton(ConsoleButtonType.X, "Select", buttonList::press);
     }
 
     @Override

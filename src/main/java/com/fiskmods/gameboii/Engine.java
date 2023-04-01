@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.fiskmods.gameboii.graphics.IDisplayScreen;
-import com.fiskmods.gameboii.graphics.Screen;
+import com.fiskmods.gameboii.graphics.screen.Screen;
 
 public class Engine
 {

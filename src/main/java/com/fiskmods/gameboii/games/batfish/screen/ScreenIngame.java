@@ -1,13 +1,5 @@
 package com.fiskmods.gameboii.games.batfish.screen;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
-
 import com.fiskmods.gameboii.Engine;
 import com.fiskmods.gameboii.GameboiiMath;
 import com.fiskmods.gameboii.games.batfish.Batfish;
@@ -22,12 +14,21 @@ import com.fiskmods.gameboii.games.batfish.level.PowerupObject.Type;
 import com.fiskmods.gameboii.games.batfish.level.PowerupObject.UseType;
 import com.fiskmods.gameboii.graphics.FilteredLevelCanvas;
 import com.fiskmods.gameboii.graphics.GameboiiFont;
-import com.fiskmods.gameboii.graphics.Screen;
+import com.fiskmods.gameboii.graphics.screen.ConsoleButtonType;
+import com.fiskmods.gameboii.graphics.screen.Screen;
 import com.fiskmods.gameboii.level.LevelObject;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 public class ScreenIngame extends Screen
 {
-    private static final Comparator<LevelObject> RENDER_ORDER = Comparator.comparingInt(t -> t.depthPlane());
+    private static final Comparator<LevelObject> RENDER_ORDER = Comparator.comparingInt(LevelObject::depthPlane);
 
     public static final boolean DEBUG = false;
     public static final int SCALE = 3;
@@ -122,7 +123,7 @@ public class ScreenIngame extends Screen
 
             for (i = 0; i < height; ++i)
             {
-                rand.setSeed(GameboiiMath.floor(heightPos / 64 * 9 * Batfish.SPACE_ALTITUDE / 8 - i) * 0xB00B1E5);
+                rand.setSeed(GameboiiMath.floor(heightPos / 64 * 9 * Batfish.SPACE_ALTITUDE / 8 - i) * 0xB00B1E5L);
 
                 for (int x = 0; x < width; ++x)
                 {
@@ -142,7 +143,7 @@ public class ScreenIngame extends Screen
 
         for (LevelObject obj : level.objects.stream().sorted(RENDER_ORDER).collect(Collectors.toList()))
         {
-            int x = getScreenPosX(width, GameboiiMath.interpolate(obj.posX, obj.prevPosX) - obj.width / 2);
+            int x = getScreenPosX(width, GameboiiMath.interpolate(obj.posX, obj.prevPosX) - obj.width / 2F);
             int y = getScreenPosY(height, altitude, GameboiiMath.interpolate(obj.posY, obj.prevPosY));
 
             if (DEBUG)
@@ -198,36 +199,18 @@ public class ScreenIngame extends Screen
 
     public void filterPixels(int[] pixels)
     {
-        //        BatfishPlayer p = Batfish.INSTANCE.player;
-        //        double altitude = GameboiiMath.interpolate(p.posY, p.prevPosY);
-        //        double heightPos = altitude / 1000;
-        //        double f = Math.max(1 - heightPos, 0.5);
-        //
-        //        for (int i = 0; i < pixels.length; ++i)
-        //        {
-        //            int rgb = pixels[i];
-        //            int r = (rgb & 0xFF0000) >> 16;
-        //            int g = (rgb & 0xFF00) >> 8;
-        //            int b = rgb & 0xFF;
-        //
-        //            r *= f;
-        //            g *= f;
-        //            b *= f;
-        //            pixels[i] = r << 16 | g << 8 | b;
-        //        }
-
         int p = Batfish.INSTANCE.worldPowerup;
 
         if (p > 0)
         {
-            float m = 100 / 2;
+            float m = 50;
             double f = Math.min(Math.sin(Math.PI * (p - m / 2) / m) + 1, 1);
 
             if (f > 0)
             {
                 BatfishPlayer player = Batfish.INSTANCE.player;
                 int cx = getScreenPosX(width, GameboiiMath.interpolate(player.posX, player.prevPosX));
-                int cy = getScreenPosY(height, player.height / 2, 0);
+                int cy = getScreenPosY(height, player.height / 2F, 0);
 
                 for (int i = 0; i < pixels.length; ++i)
                 {

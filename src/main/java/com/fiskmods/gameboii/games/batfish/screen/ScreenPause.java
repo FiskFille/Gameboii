@@ -1,12 +1,14 @@
 package com.fiskmods.gameboii.games.batfish.screen;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-
 import com.fiskmods.gameboii.Engine;
 import com.fiskmods.gameboii.games.batfish.Batfish;
 import com.fiskmods.gameboii.graphics.GameboiiFont;
-import com.fiskmods.gameboii.graphics.Screen;
+import com.fiskmods.gameboii.graphics.screen.ButtonLayout;
+import com.fiskmods.gameboii.graphics.screen.ConsoleButtonType;
+import com.fiskmods.gameboii.graphics.screen.Screen;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
 
 public class ScreenPause extends Screen
 {
@@ -22,17 +24,19 @@ public class ScreenPause extends Screen
     {
         int x = width / 2 - 200;
         int y = 140;
+        buttonList.builder()
+                .add("Resume", () -> Engine.displayScreen(prevScreen))
+                .add("Shop", () -> Engine.displayScreen(new ScreenShopMain()))
+                .add("Options", () -> Engine.displayScreen(new ScreenOptions(prevScreen)))
+                .add("Quit to Title", () ->
+                {
+                    Batfish.INSTANCE.player.reset();
+                    Engine.displayScreen(null);
+                })
+                .layout(ButtonLayout.offsetLast(0, 45))
+                .build(x, y, 400, 40);
 
-        new Button(x, y + 45 * 0, 400, 40, "Resume", () -> Engine.displayScreen(prevScreen));
-        new Button(x, y + 45 * 1, 400, 40, "Shop", () -> Engine.displayScreen(new ScreenShopMain()));
-        new Button(x, y + 45 * 2, 400, 40, "Options", () -> Engine.displayScreen(new ScreenOptions(prevScreen)));
-        new Button(x, y + 45 * 3, 400, 40, "Quit to Title", () ->
-        {
-            Batfish.INSTANCE.player.reset();
-            Engine.displayScreen(null);
-        });
-
-        addConsoleButton(ConsoleButtonType.X, "Select", this::pressButton);
+        addConsoleButton(ConsoleButtonType.X, "Select", buttonList::press);
     }
 
     @Override

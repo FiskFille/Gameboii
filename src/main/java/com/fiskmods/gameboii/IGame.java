@@ -1,6 +1,6 @@
 package com.fiskmods.gameboii;
 
-import com.fiskmods.gameboii.graphics.Screen;
+import com.fiskmods.gameboii.graphics.screen.Screen;
 
 public interface IGame
 {

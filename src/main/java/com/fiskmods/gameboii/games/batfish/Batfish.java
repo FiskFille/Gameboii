@@ -7,7 +7,7 @@ import com.fiskmods.gameboii.Engine;
 import com.fiskmods.gameboii.games.batfish.level.BatfishPlayer;
 import com.fiskmods.gameboii.games.batfish.screen.ScreenLoading;
 import com.fiskmods.gameboii.games.batfish.screen.ScreenMainMenu;
-import com.fiskmods.gameboii.graphics.Screen;
+import com.fiskmods.gameboii.graphics.screen.Screen;
 import com.fiskmods.gameboii.sound.ISoundInstance;
 
 public class Batfish extends Abstract2DGame

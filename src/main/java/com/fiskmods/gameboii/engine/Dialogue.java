@@ -3,7 +3,7 @@ package com.fiskmods.gameboii.engine;
 import java.util.function.Consumer;
 
 import com.fiskmods.gameboii.graphics.AbstractFormattedText;
-import com.fiskmods.gameboii.graphics.ScreenDialogue;
+import com.fiskmods.gameboii.graphics.screen.ScreenDialogue;
 
 public class Dialogue
 {

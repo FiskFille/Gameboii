@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.util.List;
 
 import com.fiskmods.gameboii.engine.BoundingBox;
-import com.fiskmods.gameboii.graphics.Screen;
+import com.fiskmods.gameboii.graphics.screen.Screen;
 
 public abstract class LevelObject
 {

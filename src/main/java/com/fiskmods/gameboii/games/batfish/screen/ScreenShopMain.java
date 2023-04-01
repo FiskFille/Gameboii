@@ -1,17 +1,18 @@
 package com.fiskmods.gameboii.games.batfish.screen;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
-
 import com.fiskmods.gameboii.Engine;
 import com.fiskmods.gameboii.games.batfish.Batfish;
 import com.fiskmods.gameboii.games.batfish.BatfishSounds;
 import com.fiskmods.gameboii.games.batfish.level.BatfishPlayer;
 import com.fiskmods.gameboii.games.batfish.level.BatfishPlayer.Skin;
 import com.fiskmods.gameboii.graphics.GameboiiFont;
-import com.fiskmods.gameboii.graphics.Screen;
+import com.fiskmods.gameboii.graphics.screen.ConsoleButtonType;
+import com.fiskmods.gameboii.graphics.screen.Screen;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 
 public class ScreenShopMain extends Screen
 {
