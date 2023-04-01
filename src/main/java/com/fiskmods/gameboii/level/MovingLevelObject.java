@@ -1,9 +1,9 @@
 package com.fiskmods.gameboii.level;
 
-import java.util.List;
-
 import com.fiskmods.gameboii.GameboiiMath;
 import com.fiskmods.gameboii.engine.BoundingBox;
+
+import java.util.List;
 
 public abstract class MovingLevelObject extends LevelObject
 {
@@ -115,6 +115,7 @@ public abstract class MovingLevelObject extends LevelObject
 
         onGround = y1 != y && y1 < 0;
         isCollidedHorizontally = x1 != x;
+        isCollidedVertically = y1 != y;
 
         if (Math.abs(boundingBox.minX - Math.round(boundingBox.minX)) < 1E-3)
         {
