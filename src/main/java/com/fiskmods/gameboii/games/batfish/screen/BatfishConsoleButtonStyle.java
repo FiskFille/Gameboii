@@ -2,7 +2,6 @@ package com.fiskmods.gameboii.games.batfish.screen;
 
 import com.fiskmods.gameboii.games.batfish.BatfishGraphics;
 import com.fiskmods.gameboii.graphics.Draw;
-import com.fiskmods.gameboii.graphics.GameboiiFont;
 import com.fiskmods.gameboii.graphics.screen.ConsoleButton;
 import com.fiskmods.gameboii.graphics.screen.Screen;
 import com.fiskmods.gameboii.graphics.screen.style.ConsoleButtonStyle;
@@ -25,7 +24,7 @@ public enum BatfishConsoleButtonStyle implements ConsoleButtonStyle
 
         int x = screen.width - 40;
         y += 27;
-        g2d.setFont(GameboiiFont.BUTTON_TEXT);
+        g2d.setFont(BatfishGraphics.BUTTON_TEXT);
 
         for (ConsoleButton button : buttons)
         {

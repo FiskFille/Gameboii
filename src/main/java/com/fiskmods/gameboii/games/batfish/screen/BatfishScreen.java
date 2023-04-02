@@ -1,8 +1,8 @@
 package com.fiskmods.gameboii.games.batfish.screen;
 
 import com.fiskmods.gameboii.games.batfish.BatfishGraphics;
+import com.fiskmods.gameboii.games.batfish.BatfishSounds;
 import com.fiskmods.gameboii.graphics.Draw;
-import com.fiskmods.gameboii.graphics.GameboiiFont;
 import com.fiskmods.gameboii.graphics.screen.Button;
 import com.fiskmods.gameboii.graphics.screen.Screen;
 import com.fiskmods.gameboii.graphics.screen.Slider;
@@ -21,16 +21,22 @@ public abstract class BatfishScreen extends Screen
             .consoleButtons(BatfishConsoleButtonStyle.INSTANCE)
             .button(Button.class,
                     ButtonStyle.<Button>bg(() -> BatfishGraphics.buttons, 0, 0, 200, 20)
-                            .andThen(ButtonStyle.text(GameboiiFont.BUTTON_TEXT, selected -> selected ? Color.YELLOW : Color.WHITE, 28))
+                            .andThen(ButtonStyle.text(BatfishGraphics.BUTTON_TEXT, selected -> selected ? Color.YELLOW : Color.WHITE, 28))
             ).button(Slider.class,
                     ButtonStyle.<Slider>uv(() -> BatfishGraphics.buttons, 0, 40, 200, 20)
                             .andThen(ButtonStyle.sliderPeg(() -> BatfishGraphics.buttons, 10, 0, 0, 200, 20))
-                            .andThen(ButtonStyle.text(GameboiiFont.BUTTON_TEXT, selected -> selected ? Color.YELLOW : Color.WHITE, 28))
+                            .andThen(ButtonStyle.text(BatfishGraphics.BUTTON_TEXT, selected -> selected ? Color.YELLOW : Color.WHITE, 28))
             ).build();
 
     public BatfishScreen(ScreenStyle style)
     {
         super(style);
+    }
+
+    @Override
+    public void playButtonPressSound()
+    {
+        BatfishSounds.click.play(1, 1);
     }
 
     public void drawBrickBackground(Graphics2D g2d)
@@ -46,7 +52,7 @@ public abstract class BatfishScreen extends Screen
 
     public void drawCoinCount(Graphics2D g2d, int x, int y, int coins, boolean center)
     {
-        g2d.setFont(GameboiiFont.DEFAULT);
+        g2d.setFont(BatfishGraphics.DEFAULT);
         String s = String.format(Locale.ROOT, "%,d", coins);
 
         if (center)

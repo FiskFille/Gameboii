@@ -2,11 +2,11 @@ package com.fiskmods.gameboii.games.batfish.screen;
 
 import com.fiskmods.gameboii.Engine;
 import com.fiskmods.gameboii.games.batfish.Batfish;
+import com.fiskmods.gameboii.games.batfish.BatfishGraphics;
 import com.fiskmods.gameboii.games.batfish.BatfishSounds;
 import com.fiskmods.gameboii.games.batfish.level.BatfishPlayer;
 import com.fiskmods.gameboii.games.batfish.level.BatfishPlayer.Skin;
 import com.fiskmods.gameboii.graphics.Draw;
-import com.fiskmods.gameboii.graphics.GameboiiFont;
 import com.fiskmods.gameboii.graphics.screen.ConsoleButtonType;
 import com.fiskmods.gameboii.graphics.screen.Screen;
 
@@ -51,7 +51,7 @@ public class ScreenShopMain extends BatfishScreen
         drawBrickBackground(g2d);
 
         String s = "Shop";
-        g2d.setFont(GameboiiFont.SHOP_TITLE);
+        g2d.setFont(BatfishGraphics.SHOP_TITLE);
         fontRenderer.drawStringWithShadow(s, (width - fontRenderer.getStringWidth(s)) / 2, 50, 0xFFFFFF, 0);
 
         BatfishPlayer player = Batfish.INSTANCE.player;
@@ -107,14 +107,14 @@ public class ScreenShopMain extends BatfishScreen
         //        drawImage(g2d, player.skin.getResource(), 10, 80, 80, 80);
 
         s = selectedSkin.name;
-        g2d.setFont(GameboiiFont.DEFAULT);
+        g2d.setFont(BatfishGraphics.DEFAULT);
         fontRenderer.drawStringWithShadow(s, (width - fontRenderer.getStringWidth(s)) / 2, height / 3 + 120, 0xFFFFFF, 0, 1);
         //        g2d.setFont(BatfishFont.DEFAULT);
         //        fontRenderer.drawStringWithShadow(String.format("%s %s/%s", selectedSkin.name, selectedSkin.ordinal + 1, Skin.values().length), width / 2 - 80, height / 2 - 130, 0xffffff, 0);
 
         if (!player.hasSkin(selectedSkin))
         {
-            g2d.setFont(GameboiiFont.DEFAULT);
+            g2d.setFont(BatfishGraphics.DEFAULT);
             drawCoinCount(g2d, width / 2, height / 3 + 165, selectedSkin.price, true);
         }
 

@@ -4,8 +4,8 @@ import com.fiskmods.gameboii.Engine;
 import com.fiskmods.gameboii.engine.InputKey;
 import com.fiskmods.gameboii.games.batfish.Batfish;
 import com.fiskmods.gameboii.games.batfish.BatfishCartridge;
+import com.fiskmods.gameboii.games.batfish.BatfishGraphics;
 import com.fiskmods.gameboii.games.batfish.BatfishSounds;
-import com.fiskmods.gameboii.graphics.GameboiiFont;
 import com.fiskmods.gameboii.graphics.screen.Screen;
 
 import java.awt.Color;
@@ -90,11 +90,11 @@ public class ScreenCredits extends BatfishScreen
         g2d.setColor(new Color(0, 0, 0, w));
         g2d.fillRect(0, 0, width, height);
         g2d.setColor(Color.WHITE);
-        g2d.setFont(GameboiiFont.GAME_OVER);
+        g2d.setFont(BatfishGraphics.GAME_OVER);
         String s = "Batfish";
 
         g2d.drawString(s, width / 2 - fontRenderer.getStringWidth(s) / 2, y);
-        g2d.setFont(GameboiiFont.BUTTON_TEXT);
+        g2d.setFont(BatfishGraphics.BUTTON_TEXT);
         y += 20;
 
         for (Map.Entry<String, String[]> e : credits.entrySet())
@@ -114,7 +114,7 @@ public class ScreenCredits extends BatfishScreen
         w -= Math.min(Math.max(ticks - 2400, 0) / 60F, 1);
 
         s = "Batfish will return";
-        g2d.setFont(GameboiiFont.GAME_OVER);
+        g2d.setFont(BatfishGraphics.GAME_OVER);
         g2d.setColor(new Color(1, 1, 1, w));
         g2d.drawString(s, width / 2 - fontRenderer.getStringWidth(s) / 2, height / 2);
     }

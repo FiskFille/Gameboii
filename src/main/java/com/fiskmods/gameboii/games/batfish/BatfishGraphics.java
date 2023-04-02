@@ -1,14 +1,15 @@
 package com.fiskmods.gameboii.games.batfish;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.Locale;
-
-import com.fiskmods.gameboii.games.batfish.level.PowerupObject;
 import com.fiskmods.gameboii.games.batfish.level.BatfishPlayer.Skin;
+import com.fiskmods.gameboii.games.batfish.level.PowerupObject;
 import com.fiskmods.gameboii.graphics.IResourceListener;
 import com.fiskmods.gameboii.graphics.IResourceLoader;
 import com.fiskmods.gameboii.graphics.Resource;
+
+import java.awt.Font;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Locale;
 
 public enum BatfishGraphics implements IResourceListener
 {
@@ -33,6 +34,11 @@ public enum BatfishGraphics implements IResourceListener
     public static Resource[] floors;
 
     public static int[] sky_gradient;
+
+    public static final Font BUTTON_TEXT = new Font("Calibri", Font.PLAIN, 26);
+    public static final Font SHOP_TITLE = new Font("Maiandra GD", Font.PLAIN, 50);
+    public static final Font DEFAULT = new Font("Arial Black", Font.BOLD, 30);
+    public static final Font GAME_OVER = new Font("Arial Black", Font.PLAIN, 50);
 
     @Override
     public void reload(IResourceLoader loader)

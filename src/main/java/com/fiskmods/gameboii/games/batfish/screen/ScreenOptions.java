@@ -1,7 +1,7 @@
 package com.fiskmods.gameboii.games.batfish.screen;
 
 import com.fiskmods.gameboii.Engine;
-import com.fiskmods.gameboii.graphics.GameboiiFont;
+import com.fiskmods.gameboii.games.batfish.BatfishGraphics;
 import com.fiskmods.gameboii.graphics.screen.ButtonLayout;
 import com.fiskmods.gameboii.graphics.screen.ButtonList;
 import com.fiskmods.gameboii.graphics.screen.ConsoleButtonType;
@@ -58,7 +58,7 @@ public class ScreenOptions extends BatfishScreen
         }
 
         String s = "Options";
-        g2d.setFont(GameboiiFont.SHOP_TITLE);
+        g2d.setFont(BatfishGraphics.SHOP_TITLE);
         fontRenderer.drawStringWithShadow(s, (width - fontRenderer.getStringWidth(s)) / 2, 70, 0xFFFFFF, 0);
         super.draw(g2d);
     }

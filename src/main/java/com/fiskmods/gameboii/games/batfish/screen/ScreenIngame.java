@@ -14,7 +14,6 @@ import com.fiskmods.gameboii.games.batfish.level.PowerupObject.Type;
 import com.fiskmods.gameboii.games.batfish.level.PowerupObject.UseType;
 import com.fiskmods.gameboii.graphics.Draw;
 import com.fiskmods.gameboii.graphics.FilteredLevelCanvas;
-import com.fiskmods.gameboii.graphics.GameboiiFont;
 import com.fiskmods.gameboii.graphics.screen.ConsoleButtonType;
 import com.fiskmods.gameboii.level.LevelObject;
 
@@ -174,7 +173,7 @@ public class ScreenIngame extends BatfishScreen
             }
         }
 
-        g2d.setFont(GameboiiFont.BUTTON_TEXT);
+        g2d.setFont(BatfishGraphics.BUTTON_TEXT);
         fontRenderer.drawStringWithShadow(String.format("%.1f m", p.posY / 9), x - 16, 74, 0xFFFFFF, 0);
         powerups.sort(Comparator.comparing(t -> -t.time));
         int w = 32;

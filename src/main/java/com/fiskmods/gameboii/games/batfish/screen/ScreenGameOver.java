@@ -7,7 +7,6 @@ import com.fiskmods.gameboii.games.batfish.BatfishGraphics;
 import com.fiskmods.gameboii.games.batfish.BatfishSounds;
 import com.fiskmods.gameboii.games.batfish.level.BatfishPlayer.Skin;
 import com.fiskmods.gameboii.graphics.Draw;
-import com.fiskmods.gameboii.graphics.GameboiiFont;
 import com.fiskmods.gameboii.graphics.screen.ButtonLayout;
 import com.fiskmods.gameboii.graphics.screen.ConsoleButtonType;
 import com.fiskmods.gameboii.graphics.screen.style.Centering;
@@ -118,7 +117,7 @@ public class ScreenGameOver extends BatfishScreen
         {
             Draw.imageCentered(g2d, BatfishGraphics.game_over, width / 2, 100, 113 * 4, 20 * 4);
 
-            g2d.setFont(GameboiiFont.BUTTON_TEXT);
+            g2d.setFont(BatfishGraphics.BUTTON_TEXT);
             fontRenderer.drawString(String.format("You flew %.1f m", altitude), width / 2 - 200, 230, 0xFFFFFF);
             drawCoinCount(g2d, width / 2 - 184, 190, coinsCollected, false);
             super.draw(g2d);

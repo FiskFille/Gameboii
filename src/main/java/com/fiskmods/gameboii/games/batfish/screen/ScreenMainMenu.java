@@ -4,7 +4,6 @@ import com.fiskmods.gameboii.Engine;
 import com.fiskmods.gameboii.games.batfish.Batfish;
 import com.fiskmods.gameboii.games.batfish.BatfishGraphics;
 import com.fiskmods.gameboii.graphics.Draw;
-import com.fiskmods.gameboii.graphics.GameboiiFont;
 import com.fiskmods.gameboii.graphics.screen.ButtonLayout;
 import com.fiskmods.gameboii.graphics.screen.ConsoleButtonType;
 import com.fiskmods.gameboii.graphics.screen.style.Centering;
@@ -40,7 +39,7 @@ public class ScreenMainMenu extends BatfishScreen
         Draw.imageCentered(g2d, BatfishGraphics.logo, width / 2, 80, 436, 84);
 
         String s = "Copyright FiskFille 2014";
-        g2d.setFont(GameboiiFont.BUTTON_TEXT);
+        g2d.setFont(BatfishGraphics.BUTTON_TEXT);
         fontRenderer.drawString(s, width - fontRenderer.getStringWidth(s) - 15, height - 10, 0xFFFFFF);
 
         drawCoinCount(g2d, width / 2 - 180, 151, Batfish.INSTANCE.player.totalCoins, false);

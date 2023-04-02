@@ -2,7 +2,6 @@ package com.fiskmods.gameboii.graphics.screen;
 
 import com.fiskmods.gameboii.Abstract2DGame;
 import com.fiskmods.gameboii.Engine;
-import com.fiskmods.gameboii.games.batfish.BatfishSounds;
 import com.fiskmods.gameboii.graphics.GameboiiFont;
 import com.fiskmods.gameboii.graphics.screen.style.ScreenStyle;
 
@@ -62,6 +61,10 @@ public abstract class Screen
         return Engine.getScreen() == this;
     }
 
+    public void playButtonPressSound()
+    {
+    }
+
     public void keyTyped(char character, int keyCode)
     {
         buttonList.keyTyped(keyCode);
@@ -71,7 +74,7 @@ public abstract class Screen
             if (keyCode == button.type.keyCode)
             {
                 button.runnable.run();
-                BatfishSounds.click.play(1, 1);
+                playButtonPressSound();
                 return;
             }
         }

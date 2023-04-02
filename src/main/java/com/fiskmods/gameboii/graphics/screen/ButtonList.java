@@ -1,6 +1,5 @@
 package com.fiskmods.gameboii.graphics.screen;
 
-import com.fiskmods.gameboii.games.batfish.BatfishSounds;
 import com.fiskmods.gameboii.graphics.screen.style.ButtonStyle;
 import com.fiskmods.gameboii.graphics.screen.style.Centering;
 
@@ -67,12 +66,11 @@ public class ButtonList
 
     public void press()
     {
-        if (list.size() > 0)
+        if (selectedId >= 0 && selectedId < list.size())
         {
             list.get(selectedId).onPressed();
+            parent.playButtonPressSound();
         }
-
-        BatfishSounds.click.play(1, 1);
     }
 
     public void keyTyped(int keyCode)

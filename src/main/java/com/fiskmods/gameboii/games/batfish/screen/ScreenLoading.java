@@ -2,8 +2,8 @@ package com.fiskmods.gameboii.games.batfish.screen;
 
 import com.fiskmods.gameboii.Engine;
 import com.fiskmods.gameboii.games.batfish.Batfish;
+import com.fiskmods.gameboii.games.batfish.BatfishGraphics;
 import com.fiskmods.gameboii.games.batfish.BatfishSounds;
-import com.fiskmods.gameboii.graphics.GameboiiFont;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -53,7 +53,7 @@ public class ScreenLoading extends BatfishScreen
 
         if (topText > 0)
         {
-            g2d.setFont(GameboiiFont.GAME_OVER);
+            g2d.setFont(BatfishGraphics.GAME_OVER);
             int x = width / 2;
             int y = height / 4;
 
