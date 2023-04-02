@@ -1,43 +1,52 @@
 package com.fiskmods.gameboii.graphics.screen;
 
-import com.fiskmods.gameboii.games.batfish.BatfishGraphics;
-import com.fiskmods.gameboii.graphics.GameboiiFont;
+import com.fiskmods.gameboii.graphics.screen.style.ButtonStyle;
+import com.fiskmods.gameboii.graphics.screen.style.TextProvider;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.util.function.Function;
 
-public class Button extends AbstractButton
+public class Button extends AbstractButton implements TextProvider
 {
-    public final String text;
-    private final Runnable runnable;
+    private final ButtonStyle<Button> style;
 
-    public Button(Screen screen, Rectangle bounds, String buttonText, Runnable onClick)
+    private final String text;
+    private final Runnable onPressed;
+
+    public Button(Screen screen, Rectangle bounds, ButtonStyle<Button> style, String text, Runnable onPressed)
     {
         super(screen, bounds);
-        text = buttonText;
-        runnable = onClick;
+        this.text = text;
+        this.style = style;
+        this.onPressed = onPressed;
     }
 
-    public static ButtonFactory factory(String buttonText, Runnable onClick)
+    public static ButtonFactory factory(ButtonStyle<Button> style, String text, Runnable onPressed)
     {
-        return (screen, size) -> new Button(screen, size, buttonText, onClick);
+        return (screen, size) -> new Button(screen, size, style, text, onPressed);
+    }
+
+    public static Function<ButtonStyle<Button>, ButtonFactory> factory(String text, Runnable onPressed)
+    {
+        return style -> (screen, size) -> new Button(screen, size, style, text, onPressed);
+    }
+
+    @Override
+    public String getText()
+    {
+        return text;
     }
 
     @Override
     public void onPressed()
     {
-        runnable.run();
+        onPressed.run();
     }
 
     @Override
     public void draw(Graphics2D g2d, boolean selected)
     {
-        int i = selected ? 1 : 0;
-        Screen.drawImage(g2d, BatfishGraphics.buttons, bounds.x, bounds.y, bounds.width, bounds.height, 0, i * 20, 200, (i + 1) * 20);
-
-        g2d.setFont(GameboiiFont.BUTTON_TEXT);
-        g2d.setColor(selected ? Color.YELLOW : Color.WHITE);
-        g2d.drawString(text, bounds.x + bounds.width / 2 - screen.fontRenderer.getStringWidth(text) / 2, bounds.y + 28);
+        style.draw(g2d, screen, this, selected);
     }
 }

@@ -7,6 +7,7 @@ import com.fiskmods.gameboii.games.batfish.BatfishGraphics;
 import com.fiskmods.gameboii.games.batfish.BatfishSounds;
 import com.fiskmods.gameboii.games.batfish.level.PowerupObject.Type;
 import com.fiskmods.gameboii.games.batfish.screen.ScreenGameOver;
+import com.fiskmods.gameboii.graphics.Draw;
 import com.fiskmods.gameboii.graphics.screen.Screen;
 import com.fiskmods.gameboii.level.LevelObject;
 
@@ -28,7 +29,7 @@ public class FloorObject extends LevelObject
         for (int i = 0; i < width; i += 26)
         {
             int w = Math.min(26, width - i);
-            screen.drawImage(g2d, BatfishGraphics.floors[isWood ? 1 : 0], x + i * scale, y, w * scale, 6 * scale, 0, 12, w, 18);
+            Draw.image(g2d, BatfishGraphics.floors[isWood ? 1 : 0], x + i * scale, y, w * scale, 6 * scale, 0, 12, w, 18);
         }
     }
 

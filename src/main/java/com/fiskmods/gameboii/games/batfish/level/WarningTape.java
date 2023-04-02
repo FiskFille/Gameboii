@@ -3,6 +3,7 @@ package com.fiskmods.gameboii.games.batfish.level;
 import java.awt.Graphics2D;
 
 import com.fiskmods.gameboii.games.batfish.BatfishGraphics;
+import com.fiskmods.gameboii.graphics.Draw;
 import com.fiskmods.gameboii.graphics.screen.Screen;
 import com.fiskmods.gameboii.level.LevelObject;
 
@@ -19,7 +20,7 @@ public class WarningTape extends LevelObject
     public void draw(Graphics2D g2d, Screen screen, int x, int y, int screenWidth, int screenHeight, int scale)
     {
         int i = broken ? 1 : 0;
-        screen.drawImage(g2d, BatfishGraphics.warning_tape, x - 2 * scale, y, 26 * scale, 8 * scale, 0, i * 8, 26, i * 8 + 8);
+        Draw.image(g2d, BatfishGraphics.warning_tape, x - 2 * scale, y, 26 * scale, 8 * scale, 0, i * 8, 26, i * 8 + 8);
     }
 
     @Override

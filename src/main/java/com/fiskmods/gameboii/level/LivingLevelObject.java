@@ -3,6 +3,7 @@ package com.fiskmods.gameboii.level;
 import java.awt.Graphics2D;
 import java.util.Random;
 
+import com.fiskmods.gameboii.graphics.Draw;
 import com.fiskmods.gameboii.graphics.Resource;
 import com.fiskmods.gameboii.graphics.screen.Screen;
 
@@ -39,7 +40,7 @@ public abstract class LivingLevelObject extends MovingLevelObject
         }
 
         x -= (w - width) / 2 * scale;
-        screen.drawImage(g2d, resource, x, y, w * scale, h * scale, srcX1, srcY1, srcX2, srcY1 + h);
+        Draw.image(g2d, resource, x, y, w * scale, h * scale, srcX1, srcY1, srcX2, srcY1 + h);
     }
 
     @Override

@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 
 import com.fiskmods.gameboii.games.batfish.Batfish;
 import com.fiskmods.gameboii.games.batfish.BatfishGraphics;
+import com.fiskmods.gameboii.graphics.Draw;
 import com.fiskmods.gameboii.graphics.screen.Screen;
 import com.fiskmods.gameboii.level.LevelObject;
 import com.fiskmods.gameboii.level.LivingLevelObject;
@@ -19,7 +20,7 @@ public class SpodermenMask extends MovingLevelObject
     @Override
     public void draw(Graphics2D g2d, Screen screen, int x, int y, int screenWidth, int screenHeight, int scale)
     {
-        screen.drawImage(g2d, BatfishGraphics.spodermen_mask, x, y, width * scale, height * scale);
+        Draw.image(g2d, BatfishGraphics.spodermen_mask, x, y, width * scale, height * scale);
     }
 
     @Override

@@ -1,10 +1,12 @@
 package com.fiskmods.gameboii.graphics;
 
+import com.fiskmods.gameboii.graphics.screen.style.TextProvider;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 
-public abstract class AbstractFormattedText<T extends AbstractFormattedText<T>>
+public abstract class AbstractFormattedText<T extends AbstractFormattedText<T>> implements TextProvider
 {
     private final Color color;
     private final Font font;
@@ -46,6 +48,7 @@ public abstract class AbstractFormattedText<T extends AbstractFormattedText<T>>
         return (T) this;
     }
 
+    @Override
     public abstract String getText();
 
     public int getWidth(GameboiiFont fontRenderer)
@@ -94,6 +97,7 @@ public abstract class AbstractFormattedText<T extends AbstractFormattedText<T>>
         draw(fontRenderer, graphics, x, y, defColor, defFont, (s, x1, y1) -> graphics.drawString(s, x1, y1));
     }
 
+    @FunctionalInterface
     public interface DrawFunction
     {
         void draw(String s, int x, int y);

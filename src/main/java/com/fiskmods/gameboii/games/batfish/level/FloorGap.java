@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 
 import com.fiskmods.gameboii.games.batfish.Batfish;
 import com.fiskmods.gameboii.games.batfish.BatfishGraphics;
+import com.fiskmods.gameboii.graphics.Draw;
 import com.fiskmods.gameboii.graphics.screen.Screen;
 import com.fiskmods.gameboii.level.LevelObject;
 
@@ -26,7 +27,7 @@ public class FloorGap extends LevelObject
     public void draw(Graphics2D g2d, Screen screen, int x, int y, int screenWidth, int screenHeight, int scale)
     {
         int i = depthPlane > 0 ? 0 : 1;
-        screen.drawImage(g2d, BatfishGraphics.floors[isWood ? 1 : 0], x, y - (isBossFloor ? 2 : 0) * scale, width * scale, 6 * scale, 0, i * 6, 26, i * 6 + 6);
+        Draw.image(g2d, BatfishGraphics.floors[isWood ? 1 : 0], x, y - (isBossFloor ? 2 : 0) * scale, width * scale, 6 * scale, 0, i * 6, 26, i * 6 + 6);
     }
 
     @Override

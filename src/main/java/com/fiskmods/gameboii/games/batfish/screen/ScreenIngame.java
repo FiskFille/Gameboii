@@ -12,10 +12,10 @@ import com.fiskmods.gameboii.games.batfish.level.PowerupObject;
 import com.fiskmods.gameboii.games.batfish.level.PowerupObject.Powerup;
 import com.fiskmods.gameboii.games.batfish.level.PowerupObject.Type;
 import com.fiskmods.gameboii.games.batfish.level.PowerupObject.UseType;
+import com.fiskmods.gameboii.graphics.Draw;
 import com.fiskmods.gameboii.graphics.FilteredLevelCanvas;
 import com.fiskmods.gameboii.graphics.GameboiiFont;
 import com.fiskmods.gameboii.graphics.screen.ConsoleButtonType;
-import com.fiskmods.gameboii.graphics.screen.Screen;
 import com.fiskmods.gameboii.level.LevelObject;
 
 import java.awt.Color;
@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class ScreenIngame extends Screen
+public class ScreenIngame extends BatfishScreen
 {
     private static final Comparator<LevelObject> RENDER_ORDER = Comparator.comparingInt(LevelObject::depthPlane);
 
@@ -40,6 +40,7 @@ public class ScreenIngame extends Screen
 
     public ScreenIngame(boolean newGame)
     {
+        super(STYLE);
         level = new BatfishLevel().reset();
         dialoguePrompt = newGame;
     }
@@ -184,7 +185,7 @@ public class ScreenIngame extends Screen
             int srcY = powerup.type.ordinal() * 8;
             int y = 120 + (w + 10) * i;
 
-            drawCenteredImage(g2d, BatfishGraphics.powerups, x, y, w, w, 0, srcY, 8, srcY + 8);
+            Draw.imageCentered(g2d, BatfishGraphics.powerups, x, y, w, w, 0, srcY, 8, srcY + 8);
             fontRenderer.drawStringWithShadow(powerup.type.useType == UseType.STACKABLE ? "x" + powerup.time : ticksToElapsedTime(powerup.time), x + w / 2 + 10, y + 8, 0xFFFFFF, 0);
         }
     }

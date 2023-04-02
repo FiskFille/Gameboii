@@ -7,6 +7,7 @@ import java.util.Random;
 
 import com.fiskmods.gameboii.games.batfish.Batfish;
 import com.fiskmods.gameboii.games.batfish.BatfishGraphics;
+import com.fiskmods.gameboii.graphics.Draw;
 import com.fiskmods.gameboii.graphics.screen.Screen;
 import com.fiskmods.gameboii.level.LevelObject;
 import com.fiskmods.gameboii.level.LivingLevelObject;
@@ -26,7 +27,7 @@ public class BuilderObject extends LivingLevelObject
         int srcX = (panic ? 2 + ticksExisted / 2 % 2 : ticksExisted / 8 % 2) * width;
         int srcY = facing ? height : 0;
 
-        screen.drawImage(g2d, BatfishGraphics.builder, x, y, width * scale, height * scale, srcX, srcY, srcX + width, srcY + height);
+        Draw.image(g2d, BatfishGraphics.builder, x, y, width * scale, height * scale, srcX, srcY, srcX + width, srcY + height);
     }
 
     @Override

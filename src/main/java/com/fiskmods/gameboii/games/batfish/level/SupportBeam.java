@@ -3,6 +3,7 @@ package com.fiskmods.gameboii.games.batfish.level;
 import java.awt.Graphics2D;
 
 import com.fiskmods.gameboii.games.batfish.BatfishGraphics;
+import com.fiskmods.gameboii.graphics.Draw;
 import com.fiskmods.gameboii.graphics.screen.Screen;
 import com.fiskmods.gameboii.level.LevelObject;
 
@@ -18,7 +19,7 @@ public class SupportBeam extends LevelObject
     {
         for (int h = 0; h < height; h += 16)
         {
-            screen.drawImage(g2d, BatfishGraphics.support_beam, x, y + h * scale, width * scale, Math.min(16, height - h) * scale);
+            Draw.image(g2d, BatfishGraphics.support_beam, x, y + h * scale, width * scale, Math.min(16, height - h) * scale);
         }
     }
 }

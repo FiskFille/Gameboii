@@ -2,6 +2,8 @@ package com.fiskmods.gameboii.graphics.screen;
 
 import com.fiskmods.gameboii.Engine;
 import com.fiskmods.gameboii.engine.Dialogue;
+import com.fiskmods.gameboii.graphics.Draw;
+import com.fiskmods.gameboii.graphics.screen.style.ScreenStyle;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -10,14 +12,18 @@ import java.awt.Rectangle;
 
 public class ScreenDialogue extends Screen
 {
+    private static final Font TEXT_FONT = new Font("Calibri", Font.PLAIN, 22);
+    private static final Font SPEAKER_FONT = new Font("Arial", Font.BOLD, 22);
+
     private final Screen prevScreen;
     private final boolean pauseGame;
 
     private Dialogue currDialogue;
     private boolean isSkippable = true;
 
-    public ScreenDialogue(Dialogue dialogue, boolean pause)
+    public ScreenDialogue(ScreenStyle style, Dialogue dialogue, boolean pause)
     {
+        super(style);
         prevScreen = Engine.getScreen();
         currDialogue = dialogue;
         pauseGame = pause;
@@ -83,14 +89,12 @@ public class ScreenDialogue extends Screen
         }
         else
         {
-            drawDefaultBackground(g2d);
+            drawBlank(g2d);
         }
-
-        Font font = new Font("Calibri", Font.PLAIN, 22);
 
         int b = 2;
         int w = 48;
-        int h = g2d.getFontMetrics(font).getHeight();
+        int h = g2d.getFontMetrics(TEXT_FONT).getHeight();
         Rectangle r = new Rectangle(0, 20, width, w + 24 + 2 * 10);
 
         if (currDialogue.text.length > 2)
@@ -106,14 +110,14 @@ public class ScreenDialogue extends Screen
         b = 10;
         g2d.setColor(Color.DARK_GRAY);
         g2d.fillRect(r.x + b, r.y + b + 24, w, w);
-        drawImage(g2d, currDialogue.speaker.resource.get(), r.x + b, r.y + b + 24, w, w, 5, 0 - 2, 15, 10 - 2);
+        Draw.image(g2d, currDialogue.speaker.resource.get(), r.x + b, r.y + b + 24, w, w, 5, -2, 15, 10 - 2);
 
-        g2d.setFont(new Font("Arial", Font.BOLD, 22));
+        g2d.setFont(SPEAKER_FONT);
         fontRenderer.drawString(currDialogue.speaker.name, r.x + b, r.y + b + 16, 0xFFFFFF);
 
         for (int i = 0; i < currDialogue.text.length; ++i)
         {
-            fontRenderer.drawString(currDialogue.text[i], r.x + w + b + 10, r.y + b + 42 + i * h, Color.WHITE, font);
+            fontRenderer.drawString(currDialogue.text[i], r.x + w + b + 10, r.y + b + 42 + i * h, Color.WHITE, TEXT_FONT);
         }
 
         super.draw(g2d);

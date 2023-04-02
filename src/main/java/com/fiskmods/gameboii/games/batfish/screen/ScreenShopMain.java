@@ -5,6 +5,7 @@ import com.fiskmods.gameboii.games.batfish.Batfish;
 import com.fiskmods.gameboii.games.batfish.BatfishSounds;
 import com.fiskmods.gameboii.games.batfish.level.BatfishPlayer;
 import com.fiskmods.gameboii.games.batfish.level.BatfishPlayer.Skin;
+import com.fiskmods.gameboii.graphics.Draw;
 import com.fiskmods.gameboii.graphics.GameboiiFont;
 import com.fiskmods.gameboii.graphics.screen.ConsoleButtonType;
 import com.fiskmods.gameboii.graphics.screen.Screen;
@@ -14,7 +15,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
-public class ScreenShopMain extends Screen
+public class ScreenShopMain extends BatfishScreen
 {
     private final Screen prevScreen;
 
@@ -22,6 +23,7 @@ public class ScreenShopMain extends Screen
 
     public ScreenShopMain()
     {
+        super(STYLE);
         selectedSkin = Batfish.INSTANCE.player.getSkin();
         prevScreen = Batfish.INSTANCE.currentScreen;
     }
@@ -46,7 +48,7 @@ public class ScreenShopMain extends Screen
     @Override
     public void draw(Graphics2D g2d)
     {
-        drawDefaultBackground(g2d);
+        drawBrickBackground(g2d);
 
         String s = "Shop";
         g2d.setFont(GameboiiFont.SHOP_TITLE);
@@ -63,7 +65,7 @@ public class ScreenShopMain extends Screen
 
             if (player.isSkinAvailable(skin))
             {
-                drawCenteredImage(g2d, skin.getResource(), rect.x, rect.y + (20 - skin.height) * 4, rect.width, rect.height, srcX1, 0, srcX2, 20);
+                Draw.imageCentered(g2d, skin.getResource(), rect.x, rect.y + (20 - skin.height) * 4, rect.width, rect.height, srcX1, 0, srcX2, 20);
             }
             else
             {
@@ -85,7 +87,7 @@ public class ScreenShopMain extends Screen
 
             if (player.isSkinAvailable(skin))
             {
-                drawCenteredImage(g2d, skin.getResource(), rect.x, rect.y + (20 - skin.height) * 4, rect.width, rect.height, srcX1, 0, srcX2, 20);
+                Draw.imageCentered(g2d, skin.getResource(), rect.x, rect.y + (20 - skin.height) * 4, rect.width, rect.height, srcX1, 0, srcX2, 20);
             }
             else
             {
@@ -100,7 +102,7 @@ public class ScreenShopMain extends Screen
             }
         }
 
-        drawCenteredImage(g2d, selectedSkin.getResource(), width / 2, height / 3 + (20 - selectedSkin.height) * 8, 160, 160, srcX1, 0, srcX2, 20);
+        Draw.imageCentered(g2d, selectedSkin.getResource(), width / 2, height / 3 + (20 - selectedSkin.height) * 8, 160, 160, srcX1, 0, srcX2, 20);
         drawCoinCount(g2d, 34, 34, player.totalCoins, false);
         //        drawImage(g2d, player.skin.getResource(), 10, 80, 80, 80);
 

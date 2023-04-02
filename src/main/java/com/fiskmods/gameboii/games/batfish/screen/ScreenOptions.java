@@ -6,17 +6,19 @@ import com.fiskmods.gameboii.graphics.screen.ButtonLayout;
 import com.fiskmods.gameboii.graphics.screen.ButtonList;
 import com.fiskmods.gameboii.graphics.screen.ConsoleButtonType;
 import com.fiskmods.gameboii.graphics.screen.Screen;
+import com.fiskmods.gameboii.graphics.screen.style.Centering;
 import com.fiskmods.gameboii.sound.Sound;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-public class ScreenOptions extends Screen
+public class ScreenOptions extends BatfishScreen
 {
     private final Screen bottomScreen, returnScreen;
 
     public ScreenOptions(Screen bottom)
     {
+        super(STYLE);
         returnScreen = Engine.getScreen();
         bottomScreen = bottom;
     }
@@ -24,19 +26,18 @@ public class ScreenOptions extends Screen
     @Override
     public void initScreen()
     {
-        ButtonList.ButtonBuilder builder = buttonList.builder();
+        ButtonList.Builder builder = buttonList.builder();
 
         for (Sound.Category category : Sound.Category.values())
         {
-            builder.addSlider(category.name, category::getVolume, category::setVolume);
+            builder.slider(category.name, category::getVolume, category::setVolume);
         }
 
-        int x = width / 2 - 200;
-        int y = 140;
-        builder.add("Back", () -> Engine.displayScreen(returnScreen))
+        builder.button("Back", () -> Engine.displayScreen(returnScreen))
                 .layout(ButtonLayout.spaced(0, 45)
                         .andThen(ButtonLayout.offsetLast(0, 20)))
-                .build(x, y, 400, 40);
+                .center(Centering.X)
+                .build(width / 2, 140, 400, 40);
 
         buttonList.cycle(-1);
         addConsoleButton(ConsoleButtonType.X, "Select", buttonList::press);
@@ -53,7 +54,7 @@ public class ScreenOptions extends Screen
         }
         else
         {
-            drawDefaultBackground(g2d);
+            drawBrickBackground(g2d);
         }
 
         String s = "Options";

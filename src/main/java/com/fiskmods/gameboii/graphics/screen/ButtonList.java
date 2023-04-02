@@ -1,6 +1,8 @@
 package com.fiskmods.gameboii.graphics.screen;
 
 import com.fiskmods.gameboii.games.batfish.BatfishSounds;
+import com.fiskmods.gameboii.graphics.screen.style.ButtonStyle;
+import com.fiskmods.gameboii.graphics.screen.style.Centering;
 
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -10,6 +12,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class ButtonList
@@ -36,9 +39,9 @@ public class ButtonList
         list.add(button);
     }
 
-    public ButtonBuilder builder()
+    public Builder builder()
     {
-        return new ButtonBuilder();
+        return new Builder();
     }
 
     public int getSelectedId()
@@ -104,40 +107,55 @@ public class ButtonList
         list.forEach(t -> t.draw(g2d, t.id == selectedId));
     }
 
-    public class ButtonBuilder
+    public class Builder
     {
         private final List<ButtonFactory> buttons = new ArrayList<>();
-        private ButtonLayout layout = ButtonLayout.IDENTITY;
 
-        public ButtonBuilder add(ButtonFactory constructor)
+        private ButtonLayout layout = ButtonLayout.IDENTITY;
+        private Centering centering = Centering.NONE;
+
+        public Builder button(ButtonFactory factory)
         {
-            buttons.add(constructor);
+            buttons.add(factory);
             return this;
         }
 
-        public ButtonBuilder add(String text, Runnable onClick)
+        public <T extends AbstractButton> Builder add(Class<T> type, Function<ButtonStyle<T>, ButtonFactory> factoryFunction)
         {
-            return add(Button.factory(text, onClick));
+            buttons.add(factoryFunction.apply(parent.style.getStyle(type)));
+            return this;
         }
 
-        public ButtonBuilder addSlider(String name, Supplier<Float> get, Consumer<Float> set)
+        public Builder button(String text, Runnable onPressed)
         {
-            return add(Slider.factory(name, get, set));
+            return add(Button.class, Button.factory(text, onPressed));
         }
 
-        public ButtonBuilder layout(ButtonLayout layout)
+        public Builder slider(String name, Supplier<Float> get, Consumer<Float> set)
+        {
+            return add(Slider.class, Slider.factory(name, get, set));
+        }
+
+        public Builder layout(ButtonLayout layout)
         {
             this.layout = layout;
+            return this;
+        }
+
+        public Builder center(Centering centering)
+        {
+            this.centering = centering;
             return this;
         }
 
         public void build(int x, int y, int width, int height)
         {
             Dimension dim = new Dimension(width, height);
+            Point root = centering.apply(new Point(x, y), dim);
 
             for (int i = 0; i < buttons.size(); ++i)
             {
-                Point p = layout.transform(new Point(x, y), i, buttons.size() - 1);
+                Point p = layout.transform(root, i, buttons.size() - 1);
                 ButtonList.this.add(buttons.get(i).create(parent, new Rectangle(p, dim)));
             }
         }

@@ -12,7 +12,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.*;
 
-public class ScreenCredits extends Screen
+public class ScreenCredits extends BatfishScreen
 {
     private final Map<String, String[]> credits = new LinkedHashMap<>();
     private final Screen prevScreen;
@@ -20,6 +20,7 @@ public class ScreenCredits extends Screen
 
     public ScreenCredits(Screen screen)
     {
+        super(STYLE);
         Batfish.INSTANCE.stopTitleTheme();
         BatfishSounds.whistle.play(1, 1);
         prevScreen = screen;

@@ -1,14 +1,5 @@
 package com.fiskmods.gameboii.games.batfish.level;
 
-import java.awt.AlphaComposite;
-import java.awt.Graphics2D;
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.function.BiFunction;
-
 import com.fiskmods.gameboii.Engine;
 import com.fiskmods.gameboii.ISaveObject;
 import com.fiskmods.gameboii.engine.Dialogue;
@@ -19,12 +10,22 @@ import com.fiskmods.gameboii.games.batfish.BatfishDialogue;
 import com.fiskmods.gameboii.games.batfish.BatfishGraphics;
 import com.fiskmods.gameboii.games.batfish.level.PowerupObject.Powerup;
 import com.fiskmods.gameboii.games.batfish.level.PowerupObject.Type;
+import com.fiskmods.gameboii.games.batfish.screen.BatfishScreen;
 import com.fiskmods.gameboii.games.batfish.screen.ScreenIngame;
 import com.fiskmods.gameboii.graphics.IResourceLoader;
 import com.fiskmods.gameboii.graphics.Resource;
 import com.fiskmods.gameboii.graphics.screen.Screen;
 import com.fiskmods.gameboii.graphics.screen.ScreenDialogue;
 import com.fiskmods.gameboii.level.LivingLevelObject;
+
+import java.awt.AlphaComposite;
+import java.awt.Graphics2D;
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.function.BiFunction;
 
 public class BatfishPlayer extends LivingLevelObject implements ISaveObject
 {
@@ -376,7 +377,7 @@ public class BatfishPlayer extends LivingLevelObject implements ISaveObject
     {
         if (!inDialogue)
         {
-            Engine.displayScreen(new ScreenDialogue(dialogue, pause));
+            Engine.displayScreen(new ScreenDialogue(BatfishScreen.STYLE, dialogue, pause));
             inDialogue = true;
         }
 

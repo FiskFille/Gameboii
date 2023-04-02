@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import com.fiskmods.gameboii.games.batfish.BatfishGraphics;
 import com.fiskmods.gameboii.games.batfish.BatfishSounds;
+import com.fiskmods.gameboii.graphics.Draw;
 import com.fiskmods.gameboii.graphics.screen.Screen;
 import com.fiskmods.gameboii.level.Level;
 import com.fiskmods.gameboii.level.LevelObject;
@@ -26,7 +27,7 @@ public class PowerupObject extends LevelObject
     public void draw(Graphics2D g2d, Screen screen, int x, int y, int screenWidth, int screenHeight, int scale)
     {
         int srcY = type.ordinal() * height;
-        screen.drawImage(g2d, BatfishGraphics.powerups, x, y, width * scale, height * scale, 0, srcY, width, srcY + height);
+        Draw.image(g2d, BatfishGraphics.powerups, x, y, width * scale, height * scale, 0, srcY, width, srcY + height);
     }
 
     @Override
