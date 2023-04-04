@@ -1,14 +1,15 @@
 package com.fiskmods.gameboii.games.batfish;
 
-import java.nio.ByteBuffer;
-
 import com.fiskmods.gameboii.Abstract2DGame;
-import com.fiskmods.gameboii.Engine;
 import com.fiskmods.gameboii.games.batfish.level.BatfishPlayer;
 import com.fiskmods.gameboii.games.batfish.screen.ScreenLoading;
 import com.fiskmods.gameboii.games.batfish.screen.ScreenMainMenu;
 import com.fiskmods.gameboii.graphics.screen.Screen;
+import com.fiskmods.gameboii.resource.IResourceListener;
 import com.fiskmods.gameboii.sound.ISoundInstance;
+
+import java.nio.ByteBuffer;
+import java.util.function.Consumer;
 
 public class Batfish extends Abstract2DGame
 {
@@ -26,7 +27,7 @@ public class Batfish extends Abstract2DGame
     public int worldPowerup;
 
     private boolean launched;
-    
+
     public static ISoundInstance titleTheme;
 
     public Batfish()
@@ -35,10 +36,10 @@ public class Batfish extends Abstract2DGame
     }
 
     @Override
-    public void register()
+    public void register(Consumer<IResourceListener> listeners)
     {
-        BatfishGraphics.INSTANCE.reload(Engine.system());
-        BatfishSounds.INSTANCE.reload(Engine.system());
+        listeners.accept(BatfishGraphics.INSTANCE);
+        listeners.accept(BatfishSounds.INSTANCE);
     }
 
     @Override
@@ -82,7 +83,7 @@ public class Batfish extends Abstract2DGame
             {
                 titleTheme.stop();
             }
-            
+
             titleTheme = BatfishSounds.title.play(1, 1);
             titleThemeTicks = 1160;
         }
@@ -114,11 +115,11 @@ public class Batfish extends Abstract2DGame
 
         return new ScreenMainMenu();
     }
-    
+
     public void stopTitleTheme()
     {
         titleThemeTicks = -1;
-        
+
         if (titleTheme != null)
         {
             titleTheme.stop();

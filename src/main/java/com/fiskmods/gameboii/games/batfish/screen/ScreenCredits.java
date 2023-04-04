@@ -71,7 +71,7 @@ public class ScreenCredits extends BatfishScreen
         {
             Batfish.INSTANCE.player.gameBeaten = true;
             Batfish.INSTANCE.player.reset();
-            Engine.trigger(BatfishCartridge.INSTANCE, Batfish.TRIGGER_COMPLETE);
+            BatfishCartridge.INSTANCE.trigger(Batfish.TRIGGER_COMPLETE);
         }
     }
 

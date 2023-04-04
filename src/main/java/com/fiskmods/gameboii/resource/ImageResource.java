@@ -1,30 +1,30 @@
-package com.fiskmods.gameboii.graphics;
+package com.fiskmods.gameboii.resource;
+
+import com.fiskmods.gameboii.Engine;
 
 import java.awt.image.BufferedImage;
 import java.util.function.Supplier;
 
-import com.fiskmods.gameboii.Engine;
-
-public class Resource
+public class ImageResource
 {
     protected Supplier<BufferedImage> supplier;
 
     private final int width;
     private final int height;
 
-    public Resource(int width, int height, Supplier<BufferedImage> supplier)
+    public ImageResource(int width, int height, Supplier<BufferedImage> supplier)
     {
         this.width = width;
         this.height = height;
         this.supplier = supplier;
     }
 
-    public Resource(int width, int height, BufferedImage[] data, int frames, int delay)
+    public ImageResource(int width, int height, BufferedImage[] data, int frames, int delay)
     {
         this(width, height, () -> data[(int) (Engine.getSystemTime() / 50 / delay % frames)]);
     }
 
-    public Resource(BufferedImage image)
+    public ImageResource(BufferedImage image)
     {
         this(image.getWidth(), image.getHeight(), () -> image);
     }

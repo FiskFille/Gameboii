@@ -12,11 +12,11 @@ import com.fiskmods.gameboii.games.batfish.level.PowerupObject.Powerup;
 import com.fiskmods.gameboii.games.batfish.level.PowerupObject.Type;
 import com.fiskmods.gameboii.games.batfish.screen.BatfishScreen;
 import com.fiskmods.gameboii.games.batfish.screen.ScreenIngame;
-import com.fiskmods.gameboii.graphics.IResourceLoader;
-import com.fiskmods.gameboii.graphics.Resource;
+import com.fiskmods.gameboii.resource.ImageResource;
 import com.fiskmods.gameboii.graphics.screen.Screen;
 import com.fiskmods.gameboii.graphics.screen.ScreenDialogue;
 import com.fiskmods.gameboii.level.LivingLevelObject;
+import com.fiskmods.gameboii.resource.GameResourceLoader;
 
 import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
@@ -302,7 +302,7 @@ public class BatfishPlayer extends LivingLevelObject implements ISaveObject
 
                 if (skin == Skin.SPODERMEN)
                 {
-                    Engine.trigger(BatfishCartridge.INSTANCE, Batfish.TRIGGER_SPODERMEN);
+                    BatfishCartridge.INSTANCE.trigger(Batfish.TRIGGER_SPODERMEN);
                 }
             }
 
@@ -408,9 +408,9 @@ public class BatfishPlayer extends LivingLevelObject implements ISaveObject
         public final int width;
         public final int height;
 
-        public final BiFunction<IResourceLoader, String, Resource> resource;
+        public final BiFunction<GameResourceLoader, String, ImageResource> resource;
 
-        Skin(String name, int width, int height, int price, BiFunction<IResourceLoader, String, Resource> resource)
+        Skin(String name, int width, int height, int price, BiFunction<GameResourceLoader, String, ImageResource> resource)
         {
             this.name = name;
             this.price = price;
@@ -424,7 +424,7 @@ public class BatfishPlayer extends LivingLevelObject implements ISaveObject
             this(name, width, height, price, (l, s) -> l.load(s, 4 * 20, 20));
         }
 
-        public Resource getResource()
+        public ImageResource getResource()
         {
             return BatfishGraphics.player[ordinal()];
         }

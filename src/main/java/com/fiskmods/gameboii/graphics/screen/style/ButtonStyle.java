@@ -1,7 +1,7 @@
 package com.fiskmods.gameboii.graphics.screen.style;
 
 import com.fiskmods.gameboii.graphics.Draw;
-import com.fiskmods.gameboii.graphics.Resource;
+import com.fiskmods.gameboii.resource.ImageResource;
 import com.fiskmods.gameboii.graphics.screen.AbstractButton;
 import com.fiskmods.gameboii.graphics.screen.Screen;
 import com.fiskmods.gameboii.graphics.screen.Slider;
@@ -42,7 +42,7 @@ public interface ButtonStyle<T extends AbstractButton>
         return flat(selected -> color);
     }
 
-    static <T extends AbstractButton> ButtonStyle<T> uv(Supplier<Resource> texture, int u, int v, int texW, int texH)
+    static <T extends AbstractButton> ButtonStyle<T> uv(Supplier<ImageResource> texture, int u, int v, int texW, int texH)
     {
         return (g2d, screen, button, selected) ->
         {
@@ -51,7 +51,7 @@ public interface ButtonStyle<T extends AbstractButton>
         };
     }
 
-    static <T extends AbstractButton> ButtonStyle<T> bg(Supplier<Resource> texture, int u, int v, int texW, int texH)
+    static <T extends AbstractButton> ButtonStyle<T> bg(Supplier<ImageResource> texture, int u, int v, int texW, int texH)
     {
         return (g2d, screen, button, selected) ->
         {
@@ -73,12 +73,12 @@ public interface ButtonStyle<T extends AbstractButton>
         };
     }
 
-    static <T extends Slider> ButtonStyle<T> sliderPeg(Supplier<Resource> texture, int width, int u, int v, int texW, int texH)
+    static <T extends Slider> ButtonStyle<T> sliderPeg(Supplier<ImageResource> texture, int width, int u, int v, int texW, int texH)
     {
         return (g2d, screen, button, selected) ->
         {
             Rectangle b = button.bounds;
-            Resource tex = texture.get();
+            ImageResource tex = texture.get();
             int i = selected ? 1 : 0;
             int x2 = b.x + width + (int) ((b.width - width * 2) * button.getValue());
             Draw.image(g2d, tex, x2 - width, b.y, width, b.height, u, v + i * texH, u + width / 2, v + (i + 1) * texH);

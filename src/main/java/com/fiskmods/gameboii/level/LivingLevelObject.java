@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.util.Random;
 
 import com.fiskmods.gameboii.graphics.Draw;
-import com.fiskmods.gameboii.graphics.Resource;
+import com.fiskmods.gameboii.resource.ImageResource;
 import com.fiskmods.gameboii.graphics.screen.Screen;
 
 public abstract class LivingLevelObject extends MovingLevelObject
@@ -26,7 +26,7 @@ public abstract class LivingLevelObject extends MovingLevelObject
         }
     }
 
-    public void drawBody(Graphics2D g2d, Screen screen, int x, int y, int scale, Resource resource, int frameX, int frameY, int w, int h)
+    public void drawBody(Graphics2D g2d, Screen screen, int x, int y, int scale, ImageResource resource, int frameX, int frameY, int w, int h)
     {
         int srcX1 = frameX * w;
         int srcY1 = frameY * h;

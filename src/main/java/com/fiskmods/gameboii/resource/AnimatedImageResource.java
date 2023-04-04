@@ -1,20 +1,20 @@
-package com.fiskmods.gameboii.graphics;
-
-import java.awt.image.BufferedImage;
+package com.fiskmods.gameboii.resource;
 
 import com.fiskmods.gameboii.GameboiiMath;
 
-public class ResourceAnimated extends Resource
+import java.awt.image.BufferedImage;
+
+public class AnimatedImageResource extends ImageResource
 {
     private float progress;
 
-    public ResourceAnimated(int width, int height, BufferedImage... data)
+    public AnimatedImageResource(int width, int height, BufferedImage... data)
     {
         super(width, height, null);
         supplier = () -> data[Math.min(GameboiiMath.floor(progress * (data.length + 1)), data.length) % data.length];
     }
 
-    public ResourceAnimated frame(float f)
+    public AnimatedImageResource frame(float f)
     {
         progress = f;
         return this;

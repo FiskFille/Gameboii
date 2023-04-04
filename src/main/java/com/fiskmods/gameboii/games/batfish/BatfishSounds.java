@@ -1,10 +1,11 @@
 package com.fiskmods.gameboii.games.batfish;
 
-import static com.fiskmods.gameboii.sound.Sound.Category.*;
-
-import com.fiskmods.gameboii.graphics.IResourceListener;
-import com.fiskmods.gameboii.graphics.IResourceLoader;
+import com.fiskmods.gameboii.resource.GameResourceLoader;
+import com.fiskmods.gameboii.resource.IResourceListener;
 import com.fiskmods.gameboii.sound.Sound;
+
+import static com.fiskmods.gameboii.sound.Sound.Category.EFFECT;
+import static com.fiskmods.gameboii.sound.Sound.Category.MUSIC;
 
 public enum BatfishSounds implements IResourceListener
 {
@@ -23,18 +24,18 @@ public enum BatfishSounds implements IResourceListener
     public static Sound title;
 
     @Override
-    public void reload(IResourceLoader loader)
+    public void load(GameResourceLoader loader)
     {
-        click = loader.loadSound("batfish/click", EFFECT);
-        coin = loader.loadSound("batfish/coin", EFFECT);
-        death = loader.loadSound("batfish/death", EFFECT);
-        explode = loader.loadSound("batfish/explode", 4, EFFECT);
-        pop = loader.loadSound("batfish/pop", EFFECT);
-        scream = loader.loadSound("batfish/scream", EFFECT);
-        whistle = loader.loadSound("batfish/whistle", EFFECT);
-        woodbreak = loader.loadSound("batfish/woodbreak", EFFECT);
-        world = loader.loadSound("batfish/world", EFFECT);
+        click = loader.loadSound("click", EFFECT);
+        coin = loader.loadSound("coin", EFFECT);
+        death = loader.loadSound("death", EFFECT);
+        explode = loader.loadSound("explode", 4, EFFECT);
+        pop = loader.loadSound("pop", EFFECT);
+        scream = loader.loadSound("scream", EFFECT);
+        whistle = loader.loadSound("whistle", EFFECT);
+        woodbreak = loader.loadSound("woodbreak", EFFECT);
+        world = loader.loadSound("world", EFFECT);
 
-        title = loader.loadSound("batfish/title", MUSIC);
+        title = loader.loadSound("title", MUSIC);
     }
 }
